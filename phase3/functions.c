@@ -5,6 +5,18 @@
 
 FILE *fp;
 
+void cleanup(student *stu, int n) {
+    for (int i = 0; i < n; i++) {
+        free(stu[i].name);
+        free(stu[i].roll_no);
+        free(stu[i].isa1);
+        free(stu[i].isa2);
+        free(stu[i].internals);
+        free(stu[i].esa);
+        free(stu[i].tot_marks);
+    }
+}
+
 // Input student information
 void student_info(student *stu, int n)
 {
@@ -15,6 +27,7 @@ void student_info(student *stu, int n)
         if (stu[i].name == NULL || stu[i].roll_no == NULL)
         {
             printf("Error allocating memory\n");
+            cleanup(stu,i);
             exit(1);
         }
         printf("-----------------    Data of Student %d    -----------------\n", i + 1);
@@ -180,6 +193,7 @@ void WriteToFile(student *stu, int n)
     if (fp == NULL)
     {
         printf("Error opening file!\n");
+        cleanup(stu,n);
         return;
     }
 
@@ -205,6 +219,7 @@ void ReadFromFile(student *stu, int n)
     if (fp == NULL)
     {
         printf("Error opening file!\n");
+        cleanup(stu,n);
         return;
     }
 
