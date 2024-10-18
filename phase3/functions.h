@@ -27,5 +27,6 @@ void SGPA(student *stu, int n);
 void display_gradecard(student *stu, int n);
 void WriteToFile(student *stu, int n);
 void ReadFromFile(student *stu, int n);
-
+void sort(student *stu,int n,int ch);
+void display_sorted_students(student *stu,int n);;
 #endif
