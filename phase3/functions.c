@@ -271,4 +271,39 @@ void display_gradecard(student *stu, int n)
     {
         printf("Invalid number! Please enter a valid number\n");
     }
+} 
+
+// Sort by SGPA 
+int sort_by_sgpa(const void *a, const void *b)
+{
+    student *stuA = (student *)a;
+    student *stuB = (student *)b;
+    if(stuA->sgpa < stuB->sgpa){
+        return 1;
+    }
+    else if(stuA->sgpa > stuB->sgpa){
+        return -1;
+    }
+    else{
+        return 0;
+    }
 }
+
+// Sort by name
+int sort_by_name(const void *a, const void *b)
+{
+    student *stuA = (student *)a;
+    student *stuB = (student *)b;
+    return strcmp(stuA->name, stuB->name);
+}
+
+//Sort by Roll Number
+int sot_by_roll_no(const void *a, const void *b)
+{
+    student *stuA = (student *)a;
+    student *stuB = (student *)b;
+    return strcmp(stuA->roll_no, stuB->roll_no);
+}
+
+
+
