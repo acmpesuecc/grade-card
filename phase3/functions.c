@@ -272,3 +272,55 @@ void display_gradecard(student *stu, int n)
         printf("Invalid number! Please enter a valid number\n");
     }
 }
+
+void sort(student *stu, int n, int ch) {
+    student temp;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            int swap = 0; // Flag to check if a swap has occurred
+
+            switch (ch) {
+                case 1: // Sort by SGPA
+                    if (stu[j].sgpa < stu[j + 1].sgpa) {
+                        swap = 1;
+                    }
+                    break;
+
+                case 2: // Sort by Name
+                    if (strcmp(stu[j].name, stu[j + 1].name) > 0) {
+                        swap = 1;
+                    }
+                    break;
+
+                case 3: // Sort by Roll Number
+                    if (strcmp(stu[j].roll_no, stu[j + 1].roll_no) > 0) {
+                        swap = 1;
+                    }
+                    break;
+
+                default:
+                    printf("Invalid choice\n");
+                    return;
+            }
+
+            if (swap) {
+                // Swap the students
+                temp = stu[j];
+                stu[j] = stu[j + 1];
+                stu[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void display_sorted_students(student *stu, int n) {
+    printf("-----------------------------------------------------------\n");
+    printf("Sorted Student Data:\n");
+    printf("-----------------------------------------------------------\n");
+    printf("Name\t\tRoll No.\tSemester\tSGPA\n");
+    printf("-----------------------------------------------------------\n");
+    for (int i = 0; i < n; i++) {
+        printf("%-15s %-15s %-10d %.2f\n", stu[i].name, stu[i].roll_no, stu[i].sem, stu[i].sgpa);
+    }
+    printf("-----------------------------------------------------------\n");
+}
