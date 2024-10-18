@@ -17,11 +17,12 @@ int main()
     }
 
     int choice;
+    student *stu;
 
     do
     {
         printf("Select an option: \n");
-        printf("1. Enter student details and marks\n2. Display the gradecard of the student\n3. Exit\n");
+        printf("1. Enter student details and marks\n2. Display the gradecard of the student\n3.Sort students by SGPA\n4.Sort student by Name\n5.Sort student by roll number\n6. Exit\n");
         scanf("%d", &choice);
         switch (choice)
         {
@@ -41,7 +42,20 @@ int main()
             display_gradecard(students, n);
             break;
         case 3:
+            qsort(stu, n, sizeof(student), sort_by_sgpa);
+            printf("Students sorted by SGPA.\n");
             break;
+        case 4:
+            qsort(stu, n, sizeof(student), sort_by_name);
+            printf("Students sorted by name.\n");
+            break;
+        case 5:
+            qsort(stu, n, sizeof(student), sort_by_roll_no);
+            printf("Students sorted by roll number.\n");
+            break;
+        case 6:
+            break;
+            
         default:
             printf("Invalid option.\n");
         }
