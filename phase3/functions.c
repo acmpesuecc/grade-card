@@ -84,7 +84,7 @@ void ISA2(student *stu, int n)
     printf("-----------------------------------------------------------\n");
 }
 
-//Input Internal marks
+// Input Internal marks
 void Internals(student *stu, int n)
 {
     for (int i = 0; i < n; i++)
@@ -173,7 +173,7 @@ void SGPA(student *stu, int n)
     }
 }
 
-//Writing the data to the file
+// Writing the data to the file
 void WriteToFile(student *stu, int n)
 {
     fp = fopen("student_data.csv", "w");
@@ -198,7 +198,7 @@ void WriteToFile(student *stu, int n)
     fclose(fp);
 }
 
-//Reading the data from the file
+// Reading the data from the file
 void ReadFromFile(student *stu, int n)
 {
     fp = fopen("student_data.csv", "r");
@@ -332,40 +332,55 @@ void search_rollno(student *stu, int n)
 void search_marks(student *stu, int n)
 {
     int marks;
+    int found = 0;
     printf("Enter the marks to search: ");
     scanf("%d", &marks);
+
     for (int i = 0; i < n; i++)
     {
+        int subject_found = 0;
+        printf("====================================================================\n");
+        printf("\t\t\t    GRADE CARD\n");
+        printf("Name: %-30s\n", stu[i].name);
+        printf("Semester: %-10d\n", stu[i].sem);
+        printf("Roll No.: %-20s\n", stu[i].roll_no);
+        printf("--------------------------------------------------------------------\n");
+        printf("SGPA: %.2f\n", stu[i].sgpa);
+        printf("--------------------------------------------------------------------\n");
+        printf("Subject\t\tISA1\tISA2\tInternals\tESA\n");
+        printf("--------------------------------------------------------------------\n");
+
         for (int j = 0; j < 3; j++)
         {
             if (stu[i].isa1[j] == marks || stu[i].isa2[j] == marks || stu[i].internals[j] == marks || stu[i].esa[j] == marks)
             {
-                printf("====================================================================\n");
-                printf("\t\t\t    GRADE CARD\n");
-                printf("Name: %-30s\n", stu[i].name);
-                printf("Semester: %-10d\n", stu[i].sem);
-                printf("Roll No.: %-20s\n", stu[i].roll_no);
-                printf("--------------------------------------------------------------------\n");
-                printf("SGPA: %.2f\n", stu[i].sgpa);
-                printf("--------------------------------------------------------------------\n");
-                printf("Subject\t\tISA1\tISA2\tInternals\tESA\n");
-                printf("--------------------------------------------------------------------\n");
-                for (int k = 0; k < 3; k++)
-                {
-                    printf("%s\t\t%d\t%d\t%d\t\t%d\n", stu[i].sub[k], stu[i].isa1[k], stu[i].isa2[k], stu[i].internals[k], stu[i].esa[k]);
-                }
-                printf("====================================================================\n");
-                return;
+                printf("%s\t\t%d\t%d\t%d\t\t%d\n", stu[i].sub[j], stu[i].isa1[j], stu[i].isa2[j], stu[i].internals[j], stu[i].esa[j]);
+                subject_found = 1;
+                found = 1;
             }
         }
+
+        if (!subject_found)
+        {
+            printf("No subjects found with marks %d for this student.\n", marks);
+        }
+
+        printf("====================================================================\n");
+    }
+
+    if (!found)
+    {
+        printf("No students found with marks %d in any subject.\n", marks);
     }
 }
 
 void search_sem(student *stu, int n)
 {
     int sem;
+    int found = 0;
     printf("Enter the semester to search: ");
     scanf("%d", &sem);
+
     for (int i = 0; i < n; i++)
     {
         if (stu[i].sem == sem)
@@ -385,7 +400,11 @@ void search_sem(student *stu, int n)
                 printf("%s\t\t%d\t%d\t%d\t\t%d\n", stu[i].sub[j], stu[i].isa1[j], stu[i].isa2[j], stu[i].internals[j], stu[i].esa[j]);
             }
             printf("====================================================================\n");
-            return;
+            found = 1;
         }
+    }
+    if (!found)
+    {
+        printf("No students found for semester %d\n", sem);
     }
 }
