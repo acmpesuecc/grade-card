@@ -27,5 +27,8 @@ void SGPA(student *stu, int n);
 void display_gradecard(student *stu, int n);
 void WriteToFile(student *stu, int n);
 void ReadFromFile(student *stu, int n);
+int sort_by_sgpa(const void *a,const void *b);
+int sort_by_name(const void *a,const void *b);
+int sort_by_roll_no(const void *a,const void *b);
 
 #endif
