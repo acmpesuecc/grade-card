@@ -272,3 +272,73 @@ void display_gradecard(student *stu, int n)
         printf("Invalid number! Please enter a valid number\n");
     }
 }
+
+void search_students(student *stu, int n) {
+    int choice;
+    printf("Search by:\n");
+    printf("1. Roll Number\n");
+    printf("2. Marks (total)\n");
+    printf("3. Semester\n");
+    printf("Choose an option (1-3): ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1: {
+            char roll_no[20];
+            printf("Enter roll number to search: ");
+            scanf("%s", roll_no);
+            int found = 0;
+            for (int i = 0; i < n; i++) {
+                if (strcmp(stu[i].roll_no, roll_no) == 0) {
+                    printf("Found Student: %s, Roll Number: %s, Semester: %d\n", stu[i].name, stu[i].roll_no, stu[i].sem);
+                    found = 1;
+                    break; // Found the student, exit the loop
+                }
+            }
+            if (!found) {
+                printf("No student found with roll number %s.\n", roll_no);
+            }
+            break;
+        }
+        case 2: {
+            float marks;
+            printf("Enter marks to search: ");
+            scanf("%f", &marks);
+            int found = 0;
+            for (int i = 0; i < n; i++) {
+                // Check total marks for each subject
+                for (int j = 0; j < 3; j++) {
+                    if (stu[i].tot_marks[j] == marks) {
+                        printf("Found Student: %s, Roll Number: %s, Semester: %d, Total Marks: %.2f\n", 
+                            stu[i].name, stu[i].roll_no, stu[i].sem, stu[i].tot_marks[j]);
+                        found = 1;
+                    }
+                }
+            }
+            if (!found) {
+                printf("No student found with total marks %.2f.\n", marks);
+            }
+            break;
+        }
+        case 3: {
+            int semester;
+            printf("Enter semester to search: ");
+            scanf("%d", &semester);
+            int found = 0;
+            for (int i = 0; i < n; i++) {
+                if (stu[i].sem == semester) {
+                    printf("Found Student: %s, Roll Number: %s, Semester: %d\n", stu[i].name, stu[i].roll_no, stu[i].sem);
+                    found = 1;
+                }
+            }
+            if (!found) {
+                printf("No students found in semester %d.\n", semester);
+            }
+            break;
+        }
+        default:
+            printf("Invalid choice.\n");
+            break;
+    }
+}
+

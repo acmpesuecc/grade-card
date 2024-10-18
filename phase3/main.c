@@ -2,29 +2,39 @@
 #include <stdlib.h>
 #include <string.h>
 #include "functions.h"
+#include "functions.c"
 
 int main()
 {
     int n;
     printf("Enter the number of students: ");
-    scanf("%d", &n);
+    if (scanf("%d", &n) != 1 || n <= 0) {
+        printf("Invalid input. Please enter a positive integer.\n");
+        return 1;
+    }
 
     student *students = malloc(n * sizeof(student));
-    if (students == NULL)
-    {
+    if (students == NULL) {
         printf("Error allocating memory\n");
         return 1;
     }
 
     int choice;
 
-    do
-    {
-        printf("Select an option: \n");
-        printf("1. Enter student details and marks\n2. Display the gradecard of the student\n3. Exit\n");
-        scanf("%d", &choice);
-        switch (choice)
-        {
+    do {
+        printf("\nSelect an option:\n");
+        printf("1. Enter student details and marks\n");
+        printf("2. Display the grade card of a student\n");
+        printf("3. Search for students\n");
+        printf("4. Exit\n");
+        if (scanf("%d", &choice) != 1) {
+            printf("Invalid input. Please enter a number between 1 and 4.\n");
+            // Clear input buffer if invalid
+            while (getchar() != '\n'); 
+            continue;
+        }
+
+        switch (choice) {
         case 1:
             student_info(students, n);
             ISA1(students, n);
@@ -40,15 +50,20 @@ int main()
             ReadFromFile(students, n);
             display_gradecard(students, n);
             break;
+
         case 3:
+            search_students(students, n);
             break;
+
+        case 4:
+            break;    
+            
         default:
             printf("Invalid option.\n");
         }
-    } while (choice != 3);
+    } while (choice != 4);
 
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         free(students[i].name);
         free(students[i].roll_no);
         free(students[i].isa1);
