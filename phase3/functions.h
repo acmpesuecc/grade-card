@@ -27,5 +27,9 @@ void SGPA(student *stu, int n);
 void display_gradecard(student *stu, int n);
 void WriteToFile(student *stu, int n);
 void ReadFromFile(student *stu, int n);
+void search(student *stu, int n);
+void search_roll_no(student *stu, int n);
+void search_marks(student *stu, int n);
+void search_sem(student *stu, int n);
 
 #endif

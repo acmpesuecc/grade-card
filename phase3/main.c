@@ -21,7 +21,7 @@ int main()
     do
     {
         printf("Select an option: \n");
-        printf("1. Enter student details and marks\n2. Display the gradecard of the student\n3. Exit\n");
+        printf("1. Enter student details and marks\n2. Display the gradecard of the student\n3. Search students by roll no, marks or semester\n4. Exit\n");
         scanf("%d", &choice);
         switch (choice)
         {
@@ -41,6 +41,9 @@ int main()
             display_gradecard(students, n);
             break;
         case 3:
+            search(students, n);
+            break;
+        case 4:
             break;
         default:
             printf("Invalid option.\n");

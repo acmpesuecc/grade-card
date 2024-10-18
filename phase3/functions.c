@@ -272,3 +272,120 @@ void display_gradecard(student *stu, int n)
         printf("Invalid number! Please enter a valid number\n");
     }
 }
+
+void search(student *stu, int n)
+{
+    int ch;
+    do
+    {
+        printf("Select an option:\n");
+        printf("1. Search by roll no\n 2. Search by marks\n 3. Search by sem\n 4. Exit\n");
+        scanf("%d", &ch);
+        switch (ch)
+        {
+        case 1:
+            search_rollno(stu, n);
+            break;
+        case 2:
+            search_marks(stu, n);
+            break;
+        case 3:
+            search_sem(stu, n);
+            break;
+        case 4:
+            break;
+        default:
+            printf("Wrong option buddy\n");
+        }
+    } while (ch != 4);
+}
+
+void search_rollno(student *stu, int n)
+{
+    char roll[30];
+    printf("Enter the roll number to search: ");
+    scanf("%s", roll);
+    for (int i = 0; i < n; i++)
+    {
+        if (strcmp(stu[i].roll_no, roll) == 0)
+        {
+            printf("====================================================================\n");
+            printf("\t\t\t    GRADE CARD\n");
+            printf("Name: %-30s\n", stu[i].name);
+            printf("Semester: %-10d\n", stu[i].sem);
+            printf("Roll No.: %-20s\n", stu[i].roll_no);
+            printf("--------------------------------------------------------------------\n");
+            printf("SGPA: %.2f\n", stu[i].sgpa);
+            printf("--------------------------------------------------------------------\n");
+            printf("Subject\t\tISA1\tISA2\tInternals\tESA\n");
+            printf("--------------------------------------------------------------------\n");
+            for (int j = 0; j < 3; j++)
+            {
+                printf("%s\t\t%d\t%d\t%d\t\t%d\n", stu[i].sub[j], stu[i].isa1[j], stu[i].isa2[j], stu[i].internals[j], stu[i].esa[j]);
+            }
+            printf("====================================================================\n");
+            return;
+        }
+    }
+}
+
+void search_marks(student *stu, int n)
+{
+    int marks;
+    printf("Enter the marks to search: ");
+    scanf("%d", &marks);
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (stu[i].isa1[j] == marks || stu[i].isa2[j] == marks || stu[i].internals[j] == marks || stu[i].esa[j] == marks)
+            {
+                printf("====================================================================\n");
+                printf("\t\t\t    GRADE CARD\n");
+                printf("Name: %-30s\n", stu[i].name);
+                printf("Semester: %-10d\n", stu[i].sem);
+                printf("Roll No.: %-20s\n", stu[i].roll_no);
+                printf("--------------------------------------------------------------------\n");
+                printf("SGPA: %.2f\n", stu[i].sgpa);
+                printf("--------------------------------------------------------------------\n");
+                printf("Subject\t\tISA1\tISA2\tInternals\tESA\n");
+                printf("--------------------------------------------------------------------\n");
+                for (int k = 0; k < 3; k++)
+                {
+                    printf("%s\t\t%d\t%d\t%d\t\t%d\n", stu[i].sub[k], stu[i].isa1[k], stu[i].isa2[k], stu[i].internals[k], stu[i].esa[k]);
+                }
+                printf("====================================================================\n");
+                return;
+            }
+        }
+    }
+}
+
+void search_sem(student *stu, int n)
+{
+    int sem;
+    printf("Enter the semester to search: ");
+    scanf("%d", &sem);
+    for (int i = 0; i < n; i++)
+    {
+        if (stu[i].sem == sem)
+        {
+            printf("====================================================================\n");
+            printf("\t\t\t    GRADE CARD\n");
+            printf("Name: %-30s\n", stu[i].name);
+            printf("Semester: %-10d\n", stu[i].sem);
+            printf("Roll No.: %-20s\n", stu[i].roll_no);
+            printf("--------------------------------------------------------------------\n");
+            printf("SGPA: %.2f\n", stu[i].sgpa);
+            printf("--------------------------------------------------------------------\n");
+            printf("Subject\t\tISA1\tISA2\tInternals\tESA\n");
+            printf("--------------------------------------------------------------------\n");
+            for (int j = 0; j < 3; j++)
+            {
+                printf("%s\t\t%d\t%d\t%d\t\t%d\n", stu[i].sub[j], stu[i].isa1[j], stu[i].isa2[j], stu[i].internals[j], stu[i].esa[j]);
+            }
+            printf("====================================================================\n");
+            return;
+        }
+    }
+}
