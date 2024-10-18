@@ -287,3 +287,20 @@ void display_gradecard(student *stu, int n)
         printf("Invalid number! Please enter a valid number\n");
     }
 }
+
+void sort_sgpa(student* stu,int n){
+    int swaps=0;
+    for(int i=0;i<n;i++){
+        for(int j=0;i<n-i-1;i++){
+            if(stu[i].sgpa>stu[i+1].sgpa){
+                int x=stu[i].sgpa;
+                stu[i].sgpa=stu[i+1].sgpa;
+                stu[i+1].sgpa=x;
+                swaps++;
+            }
+        }
+        if(swaps==0){
+            break;
+        }
+    }
+}
